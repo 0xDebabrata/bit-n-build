@@ -72,9 +72,9 @@ func userWebsocketHandler(w http.ResponseWriter, r *http.Request) {
 
     /*
     if userId != "" {
-            client := initClient(userId, conn, party.(*Party))  // Go type assertion
-            go client.readPump()
-            go client.writePump()
+        client := initClient(userId, conn, party.(*Party))  // Go type assertion
+        go client.readPump()
+        go client.writePump()
     }
     */
     conn.Close()

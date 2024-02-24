@@ -1,11 +1,11 @@
+package main
+
 import(
 	"github.com/gorilla/websocket"
 )
 
-
-struct User {
+type User struct {
 	usedId string
-	conn websocket.Conn
-	chan []byte
+	conn *websocket.Conn
+	send chan []byte
 }
-
