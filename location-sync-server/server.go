@@ -94,17 +94,6 @@ func adminWebsocketHandler(w http.ResponseWriter, r *http.Request) {
 
     adminClient := initAdmin("admin", conn)
     adminClient.writePump()
-
-    /*
-    party, ok := watchparties.Load(partyId)
-    if ok {
-        client := initClient(userId, conn, party.(*Party))  // Go type assertion
-        go client.readPump()
-        go client.writePump()
-    } else {
-        conn.Close()
-    }
-    */
 }
 
 func main() {
