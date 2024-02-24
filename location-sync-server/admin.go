@@ -62,6 +62,13 @@ func (a *Admin) writePump() {
                 return
             }
 
+            var locationsSlice = make([][2]float64, 200)
+            uidToGps.Range(func(key, value any) bool {
+                // value is the location coords
+                locationsSlice = append(locationsSlice, value.([2]float64))
+                return true
+            })
+
             test := "A"
             w.Write([]byte(test))
 
