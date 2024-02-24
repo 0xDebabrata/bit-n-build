@@ -90,6 +90,9 @@ func adminWebsocketHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
+    adminClient := initAdmin("admin", conn)
+    adminClient.writePump()
+
     /*
     party, ok := watchparties.Load(partyId)
     if ok {
@@ -100,7 +103,6 @@ func adminWebsocketHandler(w http.ResponseWriter, r *http.Request) {
         conn.Close()
     }
     */
-    conn.Close()
 }
 
 func main() {
