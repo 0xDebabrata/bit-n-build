@@ -10,15 +10,12 @@ import (
 	"github.com/rs/cors"
 )
 
-uidToGps sync.Map[string] *[2]float64
+var uidToGps = sync.Map{}
 
 var upgrader = websocket.Upgrader{
     ReadBufferSize: 1024,
     WriteBufferSize: 1024,
 }
-
-//var watchparties = make(map[string] *Party)
-var watchparties = sync.Map{}
 
 func hello(w http.ResponseWriter, req *http.Request) {
     w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -52,7 +49,7 @@ func handleCreateWatchparty(w http.ResponseWriter, r *http.Request) {
 */
 
 func UidToMapCreator(userId string, location *[2]float64) {
-    uidToGps[userId] = location
+    uidToGps.Store(userId, location)
 }
 
 func userWebsocketHandler(w http.ResponseWriter, r *http.Request) {
@@ -73,11 +70,14 @@ func userWebsocketHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
+    /*
     if userId != "" {
             client := initClient(userId, conn, party.(*Party))  // Go type assertion
             go client.readPump()
             go client.writePump()
     }
+    */
+    conn.Close()
 }
 
 func adminWebsocketHandler(w http.ResponseWriter, r *http.Request) {
