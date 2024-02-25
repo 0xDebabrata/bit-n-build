@@ -15,8 +15,10 @@ import FertiliserBox from './FertiliserBox'
 
 export default function LocustInfo({ selectedArea }) {
     const [randomImageNumbers, setRandomImageNumbers] = useState([]);
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        setLoading(true)
         // Generate a random number between 1 and 15
         const randoms = []
         for (let i = 0; i < 3; i++) {
@@ -28,11 +30,11 @@ export default function LocustInfo({ selectedArea }) {
             }
         }
         setRandomImageNumbers(randoms)
+        setTimeout(() => setLoading(false), 300)
     }, [selectedArea]); // Empty dependency array means this effect runs once on mount
 
     return (
         <div className="max-h-[70svh] bg-white overflow-y-auto rounded-t-xl p-4 pb-6">
-            {/* <div>{selectedArea[0]} {selectedArea[1]}</div> */}
             {randomImageNumbers.length && (
                 <div>
                     <div className='pb-4'>
@@ -56,26 +58,34 @@ export default function LocustInfo({ selectedArea }) {
                     </div>
                     <div className='pb-6'>
                         <p className='text-base font-semibold'>CCTV snapshots</p>
-                        <div className='flex flex-row items-center overflow-x-auto space-x-2'>
-                            {randomImageNumbers.map((r, idx) => (
-                                <img key={idx} src={`/${r}.png`} alt="Random Locust" className='rounded-xl' />
-                            ))}
-                        </div>
-                    </div>
-                    <div className='pb-6'>
-                        <p className='text-base font-semibold'>Control Measures</p>
-                        <p className='text-gray-600'>
-                            Based on your location and crops planted this year, the following control measures are recommended
-                        </p>
-                        <FertiliserBox>
+                        {loading ? (
+                            <div className='h-[138px]'>
+                                <p className='text-gray-600'>Fetching data...</p>
+                            </div>
+                        ) : (
+                            <>
+                                <div className='flex flex-row items-center overflow-x-auto space-x-2'>
+                                    {randomImageNumbers.map((r, idx) => (
+                                        <img key={idx} src={`/${r}.png`} alt="Random Locust" className='rounded-xl' />
+                                    ))}
+                                </div>
+                                <div className='pb-6'>
+                                    <p className='text-base font-semibold'>Control Measures</p>
+                                    <p className='text-gray-600'>
+                                        Based on your location and crops planted this year, the following control measures are recommended
+                                    </p>
+                                    <FertiliserBox>
 
-                        </FertiliserBox>
-                    </div>
-                    <div className='pb-6'>
-                        <p className='text-base font-semibold'>Swarm characteristics</p>
-                        <SizeBox></SizeBox>
-                        <br></br>
-                        <TargetBox></TargetBox>
+                                    </FertiliserBox>
+                                </div>
+                                <div className='pb-6'>
+                                    <p className='text-base font-semibold'>Swarm characteristics</p>
+                                    <SizeBox></SizeBox>
+                                    <br></br>
+                                    <TargetBox></TargetBox>
+                                </div>
+                            </>
+                        )}
                     </div>
 
                 </div>

@@ -1,28 +1,61 @@
 import React, { useState, useEffect } from 'react'
-import { MapContainer, TileLayer, Polyline, Circle } from 'react-leaflet'
+import { MapContainer, TileLayer, Circle, Polyline } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 
+const initialRegions = [
+  "Bandra (West), Mumbai",
+  "Chorasi, Gujarat",
+  "Vadodara, Gujarat",
+  "Banswara, Rajasthan",
+]
+const initialPositions = [
+  [19.044785, 72.8203021, "gray"],
+  [21.024785, 72.8203021, "gray"],
+  [22.431785, 73.1203021, "gray"],
+  [23.424785, 74.8203021, "red"],
+]
 
-const Map2 = ({ setSelectedArea }) => {
+const Map2 = ({ selectedPeriod, setSelectedArea }) => {
   const center = { lat: 19.044785, lng: 72.8203021 }
   const ZOOM_LEVEL = 6
   const [map, setMap] = useState(null)
+  const [regions, setRegions] = useState(structuredClone(initialRegions))
+  const [positions, setPositions] = useState(structuredClone(initialPositions))
 
-  const regions = [
-    "Bandra (West), Mumbai",
-    "Chorasi, Gujarat",
-    "Vadodara, Gujarat",
-    "Banswara, Rajasthan",
-  ]
-  const positions = [
-    [19.044785, 72.8203021],
-    [21.024785, 72.8203021],
-    [22.431785, 73.1203021],
-    [23.424785, 74.8203021],
-  ]
+  const updateTimeline = () => {
+    if (selectedPeriod === "Day") {
+      setRegions(structuredClone(initialRegions))
+      setPositions(structuredClone(initialPositions))
+    } else if (selectedPeriod === "Week") {
+      setRegions(prev => {
+        const copy = structuredClone(initialRegions)
+        copy.push("Mandsaur, Madhya Pradesh")
+        return copy
+      })
+      setPositions(prev => {
+        const copy = structuredClone(initialPositions)
+        copy[3][2] = "gray"
+        copy.push([24.076836, 75.069295, "red"])
+        return copy
+      })
+    } else if (selectedPeriod === "Month") {
+      setRegions(prev => {
+        const copy = structuredClone(initialRegions)
+        copy.push("Mandsaur, Madhya Pradesh")
+        copy.push("Bhilwara, Rajasthan")
+        return copy
+      })
+      setPositions(prev => {
+        const copy = structuredClone(initialPositions)
+        copy[3][2] = "gray"
+        copy.push([24.076836, 75.069295, "gray"])
+        copy.push([25.346251, 74.636383, "red"])
+        return copy
+      })
+    }
+  }
 
   const getNearestPosition = (event) => {
-    // console.log(event.latlng)
     const { lat, lng } = event.latlng
 
     for (let i = 0; i < positions.length; i++) {
@@ -30,7 +63,7 @@ const Map2 = ({ setSelectedArea }) => {
       const distance = Math.sqrt(Math.pow(item[0] - lat, 2) + Math.pow(item[1] - lng, 2));
 
       if (distance < 0.1) {
-        console.log(distance, item)
+        // console.log(distance, item)
         setSelectedArea({
           latlng: item,
           region: regions[i]
@@ -55,11 +88,22 @@ const Map2 = ({ setSelectedArea }) => {
   }
 
   useEffect(() => {
+    updateTimeline()
+  }, [selectedPeriod])
+
+  useEffect(() => {
     if (!map) return;
     getCurrentLocation()
-
-    map.target.on("click", getNearestPosition)
   }, [map]);
+
+  useEffect(() => {
+    if (!map) return
+    map.target.on("click", getNearestPosition)
+
+    return () => {
+      map.target.off("click", getNearestPosition)
+    }
+  }, [positions])
 
   return (
     <MapContainer className="z-1" center={center} zoom={ZOOM_LEVEL} whenReady={setMap}>
@@ -68,12 +112,12 @@ const Map2 = ({ setSelectedArea }) => {
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
       {positions.map((p, idx) => (
-        <>
-          <Circle center={p} pathOptions={{ fillOpacity: 1, fillColor: "red", color: "red" }} radius={12000} />
-          <Circle center={p} pathOptions={{ stroke: false, fillOpacity: 0.5, fillColor: "red", color: "red" }} radius={25000} />
-        </>
+        <div key={idx}>
+          <Circle center={p} pathOptions={{ fillOpacity: 1, fillColor: p[2], color: p[2] }} radius={12000} />
+          <Circle center={p} pathOptions={{ stroke: false, fillOpacity: 0.5, fillColor: p[2], color: p[2] }} radius={25000} />
+        </div>
       ))}
-      <Polyline pathOptions={{ color: 'blue' }} positions={positions} />
+      {/*<Polyline pathOptions={{ color: 'red', opacity: 0.5 }} positions={positions} />*/}
     </MapContainer>
   )
 }
