@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { MapContainer, TileLayer, Circle } from 'react-leaflet'
+import { MapContainer, Marker, Popup, TileLayer, Circle } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 
 const initialRegions = [
@@ -9,7 +9,7 @@ const initialRegions = [
   "Banswara, Rajasthan",
 ]
 const initialPositions = [
-  [19.044785, 72.8203021, "gray"],
+  // [19.044785, 72.8203021, "gray"],
   [21.024785, 72.8203021, "gray"],
   [22.431785, 73.1203021, "gray"],
   [23.424785, 74.8203021, "red"],
@@ -21,6 +21,7 @@ const Map2 = ({ selectedPeriod, setSelectedArea }) => {
   const [map, setMap] = useState(null)
   const [regions, setRegions] = useState(structuredClone(initialRegions))
   const [positions, setPositions] = useState(structuredClone(initialPositions))
+  const [currPosition, setCurrPosition] = useState([19.044785, 72.8203021])
 
   const updateTimeline = () => {
     if (selectedPeriod === "Day") {
@@ -111,6 +112,11 @@ const Map2 = ({ selectedPeriod, setSelectedArea }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
+      <Marker position={currPosition}>
+        <Popup>
+          You are here.
+        </Popup>
+      </Marker>
       {positions.map((p, idx) => (
         <div key={idx}>
           <Circle center={p} pathOptions={{ fillOpacity: 1, fillColor: p[2], color: p[2] }} radius={12000} />
