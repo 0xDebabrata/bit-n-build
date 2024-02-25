@@ -10,8 +10,8 @@ const Map2 = () => {
 
   const position = [19.044785, 72.8203021]
   const bounds = [
-    position,
-    [position[0] - 0.01, position[1] + 0.001]
+    [position[0] + 0.0005, position[1] - 0.0004],
+    [position[0] - 0.001, position[1] + 0.011]
   ]
 
   const locationSuccess = (geolocation) => {
@@ -44,7 +44,7 @@ const Map2 = () => {
         </Popup>
       </Marker>
       <SVGOverlay attributes={{ stroke: 'red' }} bounds={bounds}>
-        <circle r="15" cx="15" cy="15" fill="red" filter="url(#blurMe)" />
+        <circle r="25" cx="30" cy="30" fill="red" filter="url(#blurMe)" />
         <filter id="blurMe">
           <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
         </filter>
