@@ -14,7 +14,7 @@ const Index = () => {
   return (
     <div className='relative'>
       <OpenStreetMap setSelectedArea={setSelectedArea} />
-      <div className='fixed bottom-0 inset-x-0 z-10 rounded-t-xl'>
+      <div className='fixed bottom-0 inset-x-0 z-10 rounded-t-xl shadow-xl'>
         {/* <TimeSelector /> */}
         {selectedArea && (
           <LocustInfo selectedArea={selectedArea} />
