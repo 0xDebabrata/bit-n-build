@@ -34,7 +34,7 @@ export default function LocustInfo({ selectedArea }) {
     }, [selectedArea]); // Empty dependency array means this effect runs once on mount
 
     return (
-        <div className="max-h-[70svh] bg-white overflow-y-auto rounded-t-xl p-4 pb-6">
+        <div className="max-h-[60svh] bg-white overflow-y-auto px-4 pb-6">
             {randomImageNumbers.length && (
                 <div>
                     <div className='pb-4'>
@@ -69,14 +69,13 @@ export default function LocustInfo({ selectedArea }) {
                                         <img key={idx} src={`/${r}.png`} alt="Random Locust" className='rounded-xl' />
                                     ))}
                                 </div>
-                                <div className='pb-6'>
+                                <div className='py-6'>
                                     <p className='text-base font-semibold'>Control Measures</p>
                                     <p className='text-gray-600'>
                                         Based on your location and crops planted this year, the following control measures are recommended
                                     </p>
-                                    <FertiliserBox>
+                                    <FertiliserBox />
 
-                                    </FertiliserBox>
                                 </div>
                                 <div className='pb-6'>
                                     <p className='text-base font-semibold'>Swarm characteristics</p>

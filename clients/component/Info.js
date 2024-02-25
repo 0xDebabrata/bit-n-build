@@ -90,7 +90,13 @@ const Info = () => {
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 p-1 text-sm font-medium"
-                      onClick={() => setStep(Math.min(2, step + 1))}
+                      onClick={() => {
+                        if (step === 2) {
+                          closeModal()
+                          return
+                        }
+                        setStep(Math.min(2, step + 1))
+                      }}
                     >
                       <ChevronRightIcon className='h-6 w-6' />
                     </button>

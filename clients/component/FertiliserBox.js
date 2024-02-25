@@ -5,25 +5,25 @@ import { CheckCircleIcon } from '@heroicons/react/20/solid'
 
 const orders = [
     {
-        number: 'WU88191111',
-        href: '#',
+        href: 'https://www.spectracide.com/products/insect-killers/outdoor-insect-killers/spectracide-malathion-insect-spray-concentrate.aspx',
         invoiceHref: '#',
         createdDate: 'Jul 6, 2021',
         createdDatetime: '2021-07-06',
         deliveredDate: 'July 12, 2021',
         deliveredDatetime: '2021-07-12',
         total: '$160.00',
+        estimated: '7000L',
         products: [
             {
                 id: 1,
-                name: 'Micro Backpack',
+                name: 'Malathion',
                 description:
-                    'Are you a minimalist looking for a compact carry option? The Micro Backpack is the perfect size for your essential everyday carry items. Wear it like a backpack or carry it like a satchel for all-day use.',
-                href: '#',
-                price: '$70.00',
-                imageSrc: 'https://tailwindui.com/img/ecommerce-images/order-history-page-03-product-01.jpg',
+                    '',
+                href: '',
+                price: 'INR 700.00/L',
+                imageSrc: 'https://imgs.search.brave.com/nzG-S64gsgvdsMe_Ql6MmjA1DOmwSiI-02a-tnHU5PI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pNS53/YWxtYXJ0aW1hZ2Vz/LmNvbS9hc3IvNGI5/ZmM1MmUtMWU4Ny00/YjkwLWJlNTctZDU1/ZDZjMTMyMjJlXzEu/MWU3NGRiMWZlYTNm/ODRiODQ5NjJkOGNh/ZmIzNzg5OTMuanBl/Zz9vZG5XaWR0aD02/MTImb2RuSGVpZ2h0/PTYxMiZvZG5CZz1m/ZmZmZmY',
                 imageAlt:
-                    'Moss green canvas compact backpack with double top zipper, zipper front pouch, and matching carry handle and backpack straps.',
+                    'Malathion',
             },
             // More products...
         ],
@@ -38,17 +38,8 @@ function classNames(...classes) {
 export default function Example() {
     return (
         <div className="bg-white">
-            <div className="py-16 sm:py-24">
-                <div className="mx-auto max-w-7xl sm:px-2 lg:px-8">
-                    <div className="mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-0">
-                        <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Order history</h1>
-                        <p className="mt-2 text-sm text-gray-500">
-                            Check the status of recent orders, manage returns, and discover similar products.
-                        </p>
-                    </div>
-                </div>
-
-                <div className="mt-16">
+            <div className="py-6">
+                <div className="mt-6">
                     <h2 className="sr-only">Recent orders</h2>
                     <div className="mx-auto max-w-7xl sm:px-2 lg:px-8">
                         <div className="mx-auto max-w-2xl space-y-8 sm:px-4 lg:max-w-4xl lg:px-0">
@@ -64,18 +55,12 @@ export default function Example() {
                                     <div className="flex items-center border-b border-gray-200 p-4 sm:grid sm:grid-cols-4 sm:gap-x-6 sm:p-6">
                                         <dl className="grid flex-1 grid-cols-2 gap-x-6 text-sm sm:col-span-3 sm:grid-cols-3 lg:col-span-2">
                                             <div>
-                                                <dt className="font-medium text-gray-900">Order number</dt>
-                                                <dd className="mt-1 text-gray-500">{order.number}</dd>
-                                            </div>
-                                            <div className="hidden sm:block">
-                                                <dt className="font-medium text-gray-900">Date placed</dt>
-                                                <dd className="mt-1 text-gray-500">
-                                                    <time dateTime={order.createdDatetime}>{order.createdDate}</time>
-                                                </dd>
+                                                <dt className="font-medium text-gray-900">Estimated quantity</dt>
+                                                <dd className="mt-1 text-gray-500">{order.estimated}</dd>
                                             </div>
                                             <div>
-                                                <dt className="font-medium text-gray-900">Total amount</dt>
-                                                <dd className="mt-1 font-medium text-gray-900">{order.total}</dd>
+                                                <dt className="font-medium text-gray-900">Needed on</dt>
+                                                <time dateTime={order.createdDatetime}>{order.createdDate}</time>
                                             </div>
                                         </dl>
 
@@ -170,13 +155,6 @@ export default function Example() {
                                                 </div>
 
                                                 <div className="mt-6 sm:flex sm:justify-between">
-                                                    <div className="flex items-center">
-                                                        <CheckCircleIcon className="h-5 w-5 text-green-500" aria-hidden="true" />
-                                                        <p className="ml-2 text-sm font-medium text-gray-500">
-                                                            Delivered on <time dateTime={order.deliveredDatetime}>{order.deliveredDate}</time>
-                                                        </p>
-                                                    </div>
-
                                                     <div className="mt-6 flex items-center space-x-4 divide-x divide-gray-200 border-t border-gray-200 pt-4 text-sm font-medium sm:ml-4 sm:mt-0 sm:border-none sm:pt-0">
                                                         <div className="flex flex-1 justify-center">
                                                             <a
@@ -184,11 +162,6 @@ export default function Example() {
                                                                 className="whitespace-nowrap text-indigo-600 hover:text-indigo-500"
                                                             >
                                                                 View product
-                                                            </a>
-                                                        </div>
-                                                        <div className="flex flex-1 justify-center pl-4">
-                                                            <a href="#" className="whitespace-nowrap text-indigo-600 hover:text-indigo-500">
-                                                                Buy again
                                                             </a>
                                                         </div>
                                                     </div>
