@@ -10,8 +10,7 @@ const index = () => {
   return (
     <div className='relative'>
       <OpenStreetMap />
-      <div className='absolute inset-0 flex flex-col justify-between z-10'></div>
-      <div className="fixed bottom-0 left-0 w-full transform z-20">
+      <div className='absolute bottom-0 left-0 right-0 flex flex-col justify-between z-10'>
         <TimeSelector />
       </div>
     </div>
