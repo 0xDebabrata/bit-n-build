@@ -21,8 +21,7 @@ export default function LocustInfo({ selectedArea }) {
     }, [selectedArea]); // Empty dependency array means this effect runs once on mount
 
     return (
-        <div className="bg-white rounded-t-xl p-4 pb-6 overflow-hidden">
-            {/* <div>{selectedArea[0]} {selectedArea[1]}</div> */}
+        <div className="bg-white px-4 pb-6 overflow-hidden">
             {randomImageNumbers.length && (
                 <div>
                     <div className='pb-2'>
