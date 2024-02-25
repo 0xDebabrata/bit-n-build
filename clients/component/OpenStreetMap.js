@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { MapContainer, TileLayer, Polyline, Circle } from 'react-leaflet'
+import { MapContainer, TileLayer, Circle, Polyline } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 
 
@@ -73,7 +73,7 @@ const Map2 = ({ setSelectedArea }) => {
           <Circle center={p} pathOptions={{ stroke: false, fillOpacity: 0.5, fillColor: "red", color: "red" }} radius={25000} />
         </>
       ))}
-      <Polyline pathOptions={{ color: 'blue' }} positions={positions} />
+      <Polyline pathOptions={{ color: 'red', opacity: 0.5 }} positions={positions} />
     </MapContainer>
   )
 }
