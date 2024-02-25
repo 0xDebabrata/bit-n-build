@@ -5,6 +5,8 @@ import { CheckCircleIcon } from '@heroicons/react/20/solid'
 
 const orders = [
     {
+        number: 1,
+        id: 1,
         href: 'https://www.spectracide.com/products/insect-killers/outdoor-insect-killers/spectracide-malathion-insect-spray-concentrate.aspx',
         invoiceHref: '#',
         createdDate: 'Jul 6, 2021',

@@ -15,7 +15,7 @@ export default function InfoBox() {
                     </div>
                     <div className="ml-3 w-0 flex-1 pt-0.5">
                         <p className="text-sm font-medium text-gray-900">Swarm size</p>
-                        <p className="mt-1 text-sm text-gray-500">
+                        <div className="mt-1 text-sm text-gray-500">
                             This swarm is estimated to contain 2.3 lakh locusts, capable of covering around 103 sq kms in size. Farmers are advised to stay ale..
                             <div className="mt-3 flex space-x-7">
                                 <button
@@ -25,7 +25,7 @@ export default function InfoBox() {
                                     More info
                                 </button>
                             </div>
-                        </p>
+                        </div>
                     </div>
                 </div>
             </div>
