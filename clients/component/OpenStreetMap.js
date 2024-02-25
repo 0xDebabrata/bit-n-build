@@ -30,7 +30,6 @@ const Map2 = ({ setSelectedArea }) => {
       const distance = Math.sqrt(Math.pow(item[0] - lat, 2) + Math.pow(item[1] - lng, 2));
 
       if (distance < 0.6) {
-        console.log(distance, item)
         setSelectedArea({
           latlng: item,
           region: regions[i]
