@@ -62,7 +62,8 @@ const Map2 = ({ selectedPeriod, setSelectedArea }) => {
       const item = positions[i]
       const distance = Math.sqrt(Math.pow(item[0] - lat, 2) + Math.pow(item[1] - lng, 2));
 
-      if (distance < 0.6) {
+      if (distance < 0.1) {
+        // console.log(distance, item)
         setSelectedArea({
           latlng: item,
           region: regions[i]
@@ -113,10 +114,10 @@ const Map2 = ({ selectedPeriod, setSelectedArea }) => {
       {positions.map((p, idx) => (
         <div key={idx}>
           <Circle center={p} pathOptions={{ fillOpacity: 1, fillColor: p[2], color: p[2] }} radius={12000} />
-          <Circle  center={p} pathOptions={{ stroke: false, fillOpacity: 0.5, fillColor: p[2], color: p[2] }} radius={25000} />
+          <Circle center={p} pathOptions={{ stroke: false, fillOpacity: 0.5, fillColor: p[2], color: p[2] }} radius={25000} />
         </div>
       ))}
-    {/*<Polyline pathOptions={{ color: 'red', opacity: 0.5 }} positions={positions} />*/}
+      {/*<Polyline pathOptions={{ color: 'red', opacity: 0.5 }} positions={positions} />*/}
     </MapContainer>
   )
 }
