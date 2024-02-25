@@ -3,6 +3,7 @@ package main
 import (
     "time"
     "log"
+    "encoding/json"
 
 	"github.com/gorilla/websocket"
 )
@@ -62,15 +63,23 @@ func (a *Admin) writePump() {
                 return
             }
 
+            /*
             var locationsSlice = make([][2]float64, 200)
             uidToGps.Range(func(key, value any) bool {
                 // value is the location coords
                 locationsSlice = append(locationsSlice, value.([2]float64))
                 return true
             })
+            */
 
-            test := "A"
-            w.Write([]byte(test))
+            var locationsSlice = make([][2]float64, 1)
+            locationsSlice = append(locationsSlice, [2]float64{19.04453276984021, 72.81997679995794})
+            jsonData, err := json.Marshal(locationsSlice)
+            if err != nil {
+                log.Println("JSON Marshal error", err)
+                return
+            }
+            w.Write(jsonData)
 
             if err := w.Close(); err != nil {
                 log.Printf("Error closing writer %v\n", err)
