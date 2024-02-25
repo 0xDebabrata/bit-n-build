@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { MapContainer, TileLayer, Circle, Polyline } from 'react-leaflet'
+import { MapContainer, TileLayer, Circle } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 
 const initialRegions = [
@@ -17,7 +17,7 @@ const initialPositions = [
 
 const Map2 = ({ selectedPeriod, setSelectedArea }) => {
   const center = { lat: 19.044785, lng: 72.8203021 }
-  const ZOOM_LEVEL = 6
+  const ZOOM_LEVEL = 6.4
   const [map, setMap] = useState(null)
   const [regions, setRegions] = useState(structuredClone(initialRegions))
   const [positions, setPositions] = useState(structuredClone(initialPositions))
