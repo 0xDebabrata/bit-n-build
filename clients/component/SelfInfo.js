@@ -66,7 +66,7 @@ export default function SelfInfo() {
                                     <p className='text-gray-600'>
                                         Based on your location and crops planted this year, the following control measures are recommended
                                     </p>
-                            {/*<FertiliserBox />*/}
+                                <FertiliserBox />
 
                                 </div>
                                 <div className='pb-6'>

@@ -76,9 +76,7 @@ export default function LocustInfo({ selectedArea }) {
                                     <p className='text-gray-600'>
                                         Based on your location and crops planted this year, the following control measures are recommended
                                     </p>
-                            {/*
                                     <FertiliserBox />
-                                */}
 
                                 </div>
                                 <div className='pb-6'>
