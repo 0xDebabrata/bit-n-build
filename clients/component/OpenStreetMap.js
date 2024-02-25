@@ -3,7 +3,7 @@ import { MapContainer, Marker, Popup, TileLayer, Circle } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 
 const initialRegions = [
-  "Bandra (West), Mumbai",
+  //"Bandra (West), Mumbai",
   "Chorasi, Gujarat",
   "Vadodara, Gujarat",
   "Banswara, Rajasthan",
@@ -35,7 +35,7 @@ const Map2 = ({ selectedPeriod, setSelectedArea }) => {
       })
       setPositions(prev => {
         const copy = structuredClone(initialPositions)
-        copy[3][2] = "gray"
+        copy[2][2] = "gray"
         copy.push([24.076836, 75.069295, "red"])
         return copy
       })
@@ -48,7 +48,7 @@ const Map2 = ({ selectedPeriod, setSelectedArea }) => {
       })
       setPositions(prev => {
         const copy = structuredClone(initialPositions)
-        copy[3][2] = "gray"
+        copy[2][2] = "gray"
         copy.push([24.076836, 75.069295, "gray"])
         copy.push([25.346251, 74.636383, "red"])
         return copy
@@ -71,7 +71,7 @@ const Map2 = ({ selectedPeriod, setSelectedArea }) => {
         });
         break
       } else {
-        setSelectedArea(null);
+        setSelectedArea(-1);
       }
     }
   };

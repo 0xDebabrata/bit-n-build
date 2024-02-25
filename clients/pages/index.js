@@ -3,6 +3,8 @@ import TimeSelector from '../component/TimeSelector';
 import LocustInfo from '../component/LocustInfo';
 import { useState } from 'react';
 import Info from '../component/Info';
+import SelfInfo from '../component/SelfInfo';
+import Alert from "../component/Alert";
 
 // import OpenStreetMap from '../component/OpenStreetMap'
 const OpenStreetMap = dynamic(() => import('../component/OpenStreetMap'), {
@@ -20,10 +22,17 @@ const Index = () => {
       </div>
       <OpenStreetMap selectedPeriod={selectedPeriod} setSelectedArea={setSelectedArea} />
       <div className='fixed bottom-0 inset-x-0 z-10 rounded-t-xl'>
-        {selectedArea && (
+        {selectedArea ? 
+          selectedArea !== -1 ? (
+            <>
+              <TimeSelector selectedPeriod={selectedPeriod} setSelectedPeriod={setSelectedPeriod} />
+              <LocustInfo selectedArea={selectedArea} />
+            </>
+          ) : null
+         : (
           <>
-            <TimeSelector selectedPeriod={selectedPeriod} setSelectedPeriod={setSelectedPeriod} />
-            <LocustInfo selectedArea={selectedArea} />
+            <Alert />
+            <SelfInfo />
           </>
         )}
       </div>

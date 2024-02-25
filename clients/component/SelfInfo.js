@@ -13,13 +13,11 @@ import SizeBox from './SizeBox'
 import TargetBox from './TargetBox'
 import FertiliserBox from './FertiliserBox'
 
-export default function LocustInfo({ selectedArea }) {
+export default function SelfInfo() {
     const [randomImageNumbers, setRandomImageNumbers] = useState([]);
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        if (selectedArea === -1) return;
-
         setLoading(true)
         // Generate a random number between 1 and 15
         const randoms = []
@@ -32,34 +30,26 @@ export default function LocustInfo({ selectedArea }) {
             }
         }
         setRandomImageNumbers(randoms)
-        setTimeout(() => setLoading(false), 600)
-    }, [selectedArea]); // Empty dependency array means this effect runs once on mount
+        setTimeout(() => setLoading(false), 300)
+    }, []); // Empty dependency array means this effect runs once on mount
 
     return (
         <div className="max-h-[60svh] bg-white overflow-y-auto px-4 pb-6">
-            {randomImageNumbers.length && (
                 <div>
                     <div className='pb-4'>
                         <h1 className='pt-6'>
-                            {selectedArea.region}
+                          Bandra (West), Mumbai
                         </h1>
                         <h3 className='font-light text-gray-600 text-base'>
-                            Mob Reported At: {`${selectedArea.latlng[0]}, ${selectedArea.latlng[1]}`}
+                            Threat level: Low
                         </h3>
-                        <h3 className='font-light text-gray-600 text-base'>
-                            Heading: 45° North East
-                        </h3>
-                        <h3 className='font-light text-gray-600 text-base'>
-                            Speed: 16-19 Km/h
-                        </h3>
-
                         <span className='flex flex-row gap-2 pt-2'>
                             <img src="/locust.png" className='w-6 p-0.5 rounded-lg border-1' />
                             <a href="#">Type: Locust (Migratory)</a>
                         </span>
                     </div>
                     <div className='pb-6'>
-                        <p className='text-base font-semibold'>CCTV snapshots</p>
+                        <p className='text-base font-semibold'>CCTV feed</p>
                         {loading ? (
                             <div className='h-[138px]'>
                                 <p className='text-gray-600'>Fetching data...</p>
@@ -88,9 +78,8 @@ export default function LocustInfo({ selectedArea }) {
                             </>
                         )}
                     </div>
-
                 </div>
-            )}
         </div>
     );
 }
+
