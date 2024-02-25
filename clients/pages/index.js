@@ -17,11 +17,9 @@ const Index = () => {
 
   return (
     <div className='relative'>
-    {/*
       <div className='fixed top-3 right-3 z-10 rounded-xl shadow-xl'>
         <Info />
       </div>
-        */}
       <OpenStreetMap selectedPeriod={selectedPeriod} setSelectedArea={setSelectedArea} />
       <div className='fixed bottom-0 inset-x-0 z-10 rounded-t-xl'>
         {selectedArea ? 
