@@ -7,7 +7,7 @@ const OpenStreetMap = dynamic(() => import('../component/OpenStreetMap'), {
 })
 
 
-const Breadcrumb = dynamic(() => import('../component/TimeSelector'), { // Adjust the path as necessary
+const TimeSelector = dynamic(() => import('../component/TimeSelector'), { // Adjust the path as necessary
   ssr: false,
 });
 
