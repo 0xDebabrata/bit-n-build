@@ -3,16 +3,50 @@ import { MapContainer, TileLayer, Marker, SVGOverlay, Popup } from 'react-leafle
 import 'leaflet/dist/leaflet.css'
 
 
-const Map2 = () => {
+const Map2 = ({ setSelectedArea }) => {
   const center = { lat: 19.044785, lng: 72.8203021 }
-  const ZOOM_LEVEL = 16
+  const ZOOM_LEVEL = 6
   const [map, setMap] = useState(null)
 
-  const position = [19.044785, 72.8203021]
-  const bounds = [
-    [position[0] + 0.0005, position[1] - 0.0004],
-    [position[0] - 0.001, position[1] + 0.011]
+  const regions = [
+    "Badra (West), Mumbai",
+    "Chorasi, Gujarat",
+    "Banswara, Rajasthan",
   ]
+  const positions = [
+    [19.044785, 72.8203021],
+    [23.424785, 74.8203021],
+    [21.024785, 72.8203021],
+    //[19.044785, 72.8203021],
+  ]
+
+  const getNearestPosition = (event) => {
+    // console.log(event.latlng)
+    const { lat, lng } = event.latlng
+
+    for (let i = 0; i < positions.length; i++) {
+      const item = positions[i]
+      const distance = Math.sqrt(Math.pow(item[0] - lat, 2) + Math.pow(item[1] - lng, 2));
+
+      if (distance < 0.6) {
+        console.log(distance, item)
+        setSelectedArea({
+          latlng: item,
+          region: regions[i]
+        });
+        break
+      } else {
+        setSelectedArea(null);
+      }
+    }
+  };
+
+  const bounds = positions.map(p => {
+    return [
+      [p[0] + 0.5, p[1] - 0.3],
+      [p[0] - 1, p[1] + 1.5]
+    ]
+  })
 
   const locationSuccess = (geolocation) => {
     map.target.flyTo({
@@ -29,8 +63,9 @@ const Map2 = () => {
   useEffect(() => {
     if (!map) return;
     getCurrentLocation()
-  }, [map]);
 
+    map.target.on("click", getNearestPosition)
+  }, [map]);
 
   return (
     <MapContainer className="z-1" center={center} zoom={ZOOM_LEVEL} whenReady={setMap}>
@@ -38,17 +73,14 @@ const Map2 = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
-      <Marker position={position}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker>
-      <SVGOverlay attributes={{ stroke: 'red' }} bounds={bounds}>
-        <circle r="25" cx="30" cy="30" fill="red" filter="url(#blurMe)" />
-        <filter id="blurMe">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
-        </filter>
-      </SVGOverlay>
+      {positions.map((p, idx) => (
+        <SVGOverlay key={idx} attributes={{ stroke: 'red' }} bounds={bounds[idx]}>
+          <circle r="10" cx="15" cy="15" fill="red" filter="url(#blurMe)" onClick={console.log} />
+          <filter id="blurMe">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+          </filter>
+        </SVGOverlay>
+      ))}
     </MapContainer>
   )
 }

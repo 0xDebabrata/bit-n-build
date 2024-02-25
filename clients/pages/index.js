@@ -1,20 +1,31 @@
 import dynamic from 'next/dynamic'
 import TimeSelector from '../component/TimeSelector';
+import LocustInfo from '../component/LocustInfo';
+import { useEffect, useState } from 'react';
 
 // import OpenStreetMap from '../component/OpenStreetMap'
 const OpenStreetMap = dynamic(() => import('../component/OpenStreetMap'), {
   ssr: false,
 })
 
-const index = () => {
+const Index = () => {
+  const [selectedArea, setSelectedArea] = useState(null)
+
+  useEffect(() => {
+    console.log("Selected area", selectedArea)
+  }, [selectedArea])
+
   return (
     <div className='relative'>
-      <OpenStreetMap />
-      <div className='fixed bottom-0 left-0 right-0 flex flex-col justify-between z-10'>
-        <TimeSelector />
+      <OpenStreetMap setSelectedArea={setSelectedArea} />
+      <div className='fixed bottom-0 inset-x-0 z-10 rounded-t-xl'>
+        {/* <TimeSelector /> */}
+        {selectedArea && (
+          <LocustInfo selectedArea={selectedArea} />
+        )}
       </div>
     </div>
   )
 }
 
-export default index
+export default Index
