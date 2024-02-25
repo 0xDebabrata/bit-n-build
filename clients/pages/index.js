@@ -6,11 +6,6 @@ const OpenStreetMap = dynamic(() => import('../component/OpenStreetMap'), {
   ssr: false,
 })
 
-
-const TimeSelector = dynamic(() => import('../component/TimeSelector'), { // Adjust the path as necessary
-  ssr: false,
-});
-
 const index = () => {
   return (
     <div className='relative'>
