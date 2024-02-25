@@ -1,5 +1,8 @@
 from fastapi import FastAPI
 from model import generate_prediction
+import tensorflow.keras.models import load_model
+
+model = tf.keras.models.load_model('outputname.h5')
 
 app = FastAPI()
 
