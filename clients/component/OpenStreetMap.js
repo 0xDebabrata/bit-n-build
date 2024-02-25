@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { MapContainer, TileLayer, Marker, SVGOverlay, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Polyline, Circle } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 
 
@@ -9,15 +9,16 @@ const Map2 = ({ setSelectedArea }) => {
   const [map, setMap] = useState(null)
 
   const regions = [
-    "Badra (West), Mumbai",
+    "Bandra (West), Mumbai",
     "Chorasi, Gujarat",
+    "Vadodara, Gujarat",
     "Banswara, Rajasthan",
   ]
   const positions = [
     [19.044785, 72.8203021],
-    [23.424785, 74.8203021],
     [21.024785, 72.8203021],
-    //[19.044785, 72.8203021],
+    [22.431785, 73.1203021],
+    [23.424785, 74.8203021],
   ]
 
   const getNearestPosition = (event) => {
@@ -40,13 +41,6 @@ const Map2 = ({ setSelectedArea }) => {
       }
     }
   };
-
-  const bounds = positions.map(p => {
-    return [
-      [p[0] + 0.5, p[1] - 0.3],
-      [p[0] - 1, p[1] + 1.5]
-    ]
-  })
 
   const locationSuccess = (geolocation) => {
     map.target.flyTo({
@@ -74,13 +68,12 @@ const Map2 = ({ setSelectedArea }) => {
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
       {positions.map((p, idx) => (
-        <SVGOverlay key={idx} attributes={{ stroke: 'red' }} bounds={bounds[idx]}>
-          <circle r="10" cx="15" cy="15" fill="red" filter="url(#blurMe)" onClick={console.log} />
-          <filter id="blurMe">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
-          </filter>
-        </SVGOverlay>
+        <>
+          <Circle center={p} pathOptions={{ fillOpacity: 1, fillColor: "red", color: "red" }} radius={12000} />
+          <Circle center={p} pathOptions={{ stroke: false, fillOpacity: 0.5, fillColor: "red", color: "red" }} radius={25000} />
+        </>
       ))}
+      <Polyline pathOptions={{ color: 'blue' }} positions={positions} />
     </MapContainer>
   )
 }

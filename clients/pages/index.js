@@ -11,10 +11,6 @@ const OpenStreetMap = dynamic(() => import('../component/OpenStreetMap'), {
 const Index = () => {
   const [selectedArea, setSelectedArea] = useState(null)
 
-  useEffect(() => {
-    console.log("Selected area", selectedArea)
-  }, [selectedArea])
-
   return (
     <div className='relative'>
       <OpenStreetMap setSelectedArea={setSelectedArea} />
